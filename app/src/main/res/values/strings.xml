@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">NFC Tag Manager</string>
+    <string name="action_settings">Settings</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="add_tag_dialog">Add an NFC tag</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_tag">NFC Tag</string>
+</resources>

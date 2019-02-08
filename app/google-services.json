@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "99909175612",
+    "firebase_url": "https://nfctagmanager.firebaseio.com",
+    "project_id": "nfctagmanager",
+    "storage_bucket": "nfctagmanager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99909175612:android:b4d72f77837ebb8a",
+        "android_client_info": {
+          "package_name": "com.gp.nfctagmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "99909175612-1fqnpu03dkliig0rr5aq4a8eeh0g5p2v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gp.nfctagmanager",
+            "certificate_hash": "c3de0e4384ae853676089fa311a95cd769ee720d"
+          }
+        },
+        {
+          "client_id": "99909175612-2nh4ehs69ib1deenopj738sehap0s7pc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPJfdw_x6mlBNzpd2VtkHpYMuxDORi_Sc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "99909175612-2nh4ehs69ib1deenopj738sehap0s7pc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
