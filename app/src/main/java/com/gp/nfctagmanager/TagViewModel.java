@@ -29,7 +29,7 @@ public class TagViewModel extends AndroidViewModel {
         repository.delete(tag);
     }
 
-    public void deleteAllTags(Tag tag){
+    public void deleteAllTags(){
         repository.deleteAllNotes();
     }
 

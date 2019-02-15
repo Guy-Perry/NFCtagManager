@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddTagActivity"
+            android:name=".AddEditTagActivity"
             android:parentActivityName=".MainActivity" />
     </application>
 

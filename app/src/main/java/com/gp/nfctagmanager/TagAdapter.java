@@ -12,6 +12,7 @@ import java.util.List;
 
 public class TagAdapter extends RecyclerView.Adapter<TagAdapter.TagHolder> {
     private List<Tag> tags = new ArrayList<>();
+    private OnItemClickListener listener;
 
     @NonNull
     @Override
@@ -37,12 +38,34 @@ public class TagAdapter extends RecyclerView.Adapter<TagAdapter.TagHolder> {
         notifyDataSetChanged();
     }
 
+    public Tag getTagAt(int position){
+        return tags.get(position);
+    }
+
     class TagHolder extends RecyclerView.ViewHolder {
         private TextView textViewName;
 
         public TagHolder(@NonNull View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.text_view_name);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.OnItemClick(tags.get(position));
+                    }
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener {
+        void OnItemClick(Tag tag);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 }

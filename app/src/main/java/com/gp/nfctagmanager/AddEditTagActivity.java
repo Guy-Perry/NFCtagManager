@@ -9,8 +9,10 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class AddTagActivity extends AppCompatActivity {
+public class AddEditTagActivity extends AppCompatActivity {
 
+    public static final String EXTRA_ID =
+            "com.gp.nfctagmanager.EXTRA_ID";
     public static final String EXTRA_NAME =
             "com.gp.nfctagmanager.EXTRA_NAME";
     public static final String EXTRA_TAG =
@@ -29,7 +31,16 @@ public class AddTagActivity extends AppCompatActivity {
         editTag = findViewById(R.id.add_tag);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
-        setTitle("Add Tag");
+
+        Intent intent = getIntent();
+
+        if (intent.hasExtra(EXTRA_ID)){
+            setTitle("Edit Tag");
+            editTextName.setText(intent.getStringExtra(EXTRA_NAME));
+            editTag.setText(intent.getStringExtra(EXTRA_TAG));
+        } else {
+            setTitle("Add Tag");
+        }
     }
 
     private void saveTag() {
@@ -45,9 +56,16 @@ public class AddTagActivity extends AppCompatActivity {
         data.putExtra(EXTRA_NAME, name);
         data.putExtra(EXTRA_TAG, tag);
 
+        int id = getIntent().getIntExtra(EXTRA_ID, -1);
+        if (id != -1){
+            data.putExtra(EXTRA_ID, id);
+        }
+
         setResult(RESULT_OK, data);
         finish();
     }
+
+    //public void deleteTag()
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
