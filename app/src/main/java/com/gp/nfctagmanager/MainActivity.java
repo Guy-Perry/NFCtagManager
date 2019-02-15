@@ -1,7 +1,9 @@
 package com.gp.nfctagmanager;
 
+import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,6 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     public static final int ADD_TAG_REQUEST = 1;
     public static final int EDIT_TAG_REQUEST = 2;
+
 
     private TagViewModel tagViewModel;
 
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(AddEditTagActivity.EXTRA_ID, tag.getId());
                 intent.putExtra(AddEditTagActivity.EXTRA_NAME, tag.getName());
                 intent.putExtra(AddEditTagActivity.EXTRA_TAG, tag.getTagCode());
+                intent.putExtra(AddEditTagActivity.EXTRA_DELETE, false);
                 startActivityForResult(intent, EDIT_TAG_REQUEST);
             }
         });
@@ -87,14 +91,21 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
+            boolean delete = data.getBooleanExtra(AddEditTagActivity.EXTRA_DELETE, false);
+
             String name = data.getStringExtra(AddEditTagActivity.EXTRA_NAME);
             String tagId = data.getStringExtra(AddEditTagActivity.EXTRA_TAG);
 
             Tag tag = new Tag(name, tagId);
             tag.setId(id);
-            tagViewModel.update(tag);
+            if (delete) {
+                tagViewModel.delete(tag);
+                Toast.makeText(this, "Tag deleted", Toast.LENGTH_SHORT).show();
+            } else {
+                tagViewModel.update(tag);
+                Toast.makeText(this, "Tag updated", Toast.LENGTH_SHORT).show();
+            }
 
-            Toast.makeText(this, "Tag updated", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Tag not saved", Toast.LENGTH_SHORT).show();
         }
@@ -113,8 +124,18 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.delete_all_tags:
-                tagViewModel.deleteAllTags();
-                Toast.makeText(this, "All tags deleted", Toast.LENGTH_SHORT).show();
+                new AlertDialog.Builder(this)
+                        .setTitle("Title")
+                        .setMessage("Are you sure you want to delete all NFC tags from this devices?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton("Delete all", new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                tagViewModel.deleteAllTags();
+                                Toast.makeText(MainActivity.this, "All tags deleted", Toast.LENGTH_SHORT).show();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
+                //Toast.makeText(this, "All tags deleted", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

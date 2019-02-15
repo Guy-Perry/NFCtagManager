@@ -5,5 +5,7 @@
     <string name="confirm">Confirm</string>
     <string name="add_tag_dialog">Add an NFC tag</string>
     <string name="hint_name">Name</string>
-    <string name="hint_tag">NFC Tag</string>
+    <string name="hint_tag">NFC tag</string>
+    <string name="delete_tag">Delete tag</string>
+
 </resources>

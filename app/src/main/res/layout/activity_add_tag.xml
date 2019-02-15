@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".AddEditTagActivity">
@@ -19,7 +20,19 @@
         android:id="@+id/add_tag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_text_name"
         android:hint="@string/hint_tag"
         android:inputType="text"/>
 
-</LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/button_delete_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="32dp"
+        android:src="@drawable/ic_delete"
+        app:backgroundTint="@color/colorPrimary" />
+
+</RelativeLayout>
+
