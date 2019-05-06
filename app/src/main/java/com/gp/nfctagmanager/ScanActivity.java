@@ -24,7 +24,7 @@ public class ScanActivity extends AppCompatActivity implements NfcAdapter.OnNdef
 
     private static final String TAG = "ScanActivity";
 
-    private String tagIDString;
+    public String tagIDString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +85,10 @@ public class ScanActivity extends AppCompatActivity implements NfcAdapter.OnNdef
 
     @Override
     public NdefMessage createNdefMessage(NfcEvent event) {
-        return null;
+        byte[] payload = tagIDString.
+                getBytes(Charset.forName("UTF-8"));
+
+        NdefRecord record = NdefRecord.createMime("text/plain", payload);
+        return new NdefMessage(record);
     }
 }
