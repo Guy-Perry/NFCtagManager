@@ -3,15 +3,17 @@ package com.gp.nfctagmanager;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.Objects;
 
 public class AddEditTagActivity extends AppCompatActivity {
 
@@ -38,7 +40,7 @@ public class AddEditTagActivity extends AppCompatActivity {
         editTag = findViewById(R.id.add_tag);
         deleteTagButton = findViewById(R.id.button_delete_tag);
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+        Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_close);
 
         Intent intent = getIntent();
 

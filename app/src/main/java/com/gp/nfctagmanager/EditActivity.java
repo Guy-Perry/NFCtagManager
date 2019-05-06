@@ -7,41 +7,36 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class EditActivity extends AppCompatActivity {
     public static final int ADD_TAG_REQUEST = 1;
     public static final int EDIT_TAG_REQUEST = 2;
-
+    private static final String TAG = "EditActivity";
     private TagViewModel tagViewModel;
-
-    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("Edit Tags");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_edit);
         Log.d(TAG, "onCreate: started");
 
-        FloatingActionButton buttonAddTag = findViewById(R.id.button_add_tag);
-        buttonAddTag.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddEditTagActivity.class);
-                startActivityForResult(intent, ADD_TAG_REQUEST);
-            }
-        });
+//        FloatingActionButton buttonAddTag = findViewById(R.id.button_add_tag);
+//        buttonAddTag.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(EditActivity.this, AddEditTagActivity.class);
+//                startActivityForResult(intent, ADD_TAG_REQUEST);
+//            }
+//        });
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -61,15 +56,15 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new TagAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(Tag tag) {
-                Intent intent = new Intent(MainActivity.this, ScanActivity.class);
+                Intent intent = new Intent(EditActivity.this, AddEditTagActivity.class);
                 intent.putExtra(AddEditTagActivity.EXTRA_ID, tag.getId());
                 intent.putExtra(AddEditTagActivity.EXTRA_NAME, tag.getName());
                 intent.putExtra(AddEditTagActivity.EXTRA_TAG, tag.getTagCode());
                 intent.putExtra(AddEditTagActivity.EXTRA_DELETE, false);
-                startActivity(intent);
+                startActivityForResult(intent, EDIT_TAG_REQUEST);
             }
         });
-     }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -111,12 +106,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //add items to the drop down menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main_menu, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater menuInflater = getMenuInflater();
+//        menuInflater.inflate(R.menu.main_menu, menu);
+//        return true;
+//    }
 
     //options for the drop down menu
     @Override
@@ -131,16 +126,14 @@ public class MainActivity extends AppCompatActivity {
 
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 tagViewModel.deleteAllTags();
-                                Toast.makeText(MainActivity.this, "All tags deleted", Toast.LENGTH_SHORT).show();
-                            }})
+                                Toast.makeText(EditActivity.this, "All tags deleted", Toast.LENGTH_SHORT).show();
+                            }
+                        })
                         .setNegativeButton(android.R.string.no, null).show();
                 //Toast.makeText(this, "All tags deleted", Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.edit_tags:
-                Intent i = new Intent(MainActivity.this, EditActivity.class);
-                startActivity(i);
             default:
-                return super.onOptionsItemSelected(item); 
+                return super.onOptionsItemSelected(item);
         }
     }
 }

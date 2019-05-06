@@ -7,5 +7,11 @@
     <string name="hint_name">Name</string>
     <string name="hint_tag">NFC tag</string>
     <string name="delete_tag">Delete tag</string>
-
+    <string name="servicedesc">servicedesc</string>
+    <string name="aiddescription">aiddescription</string>
+    <string name="edit_tags">Edit tags</string>
+    <string name="delete_all_tags">Delete all tags</string>
+    <string name="tagname">[TagName]</string>
+    <string name="in_use">In Use</string>
+    <string name="examplename">ExampleName</string>
 </resources>
