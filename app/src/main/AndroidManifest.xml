@@ -33,8 +33,14 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ScanActivity"
-            android:parentActivityName=".MainActivity" />
-
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc_tech" />
+        </activity>
     </application>
 
 </manifest>
