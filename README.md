@@ -10,3 +10,4 @@ This project shows use of:
 * RoomDatabase
 * Example unit test
 * Example androidTest
+* NFC technology
